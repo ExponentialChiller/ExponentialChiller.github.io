@@ -6,13 +6,17 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>Hexo</title>
+  <title>some basic concpts in UE4 | Hexo</title>
   <meta name="author" content="John Doe">
+  
+  <meta name="description" content="·. 简单基础概念1.1. Actor    所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。Actor支持三维变换，例如平移、旋转和缩放。你可以通过游戏逻辑代码（C++或蓝图）创建（生成）或销毁Actor。
+
+Actor的基类是AActor.FActor 功能 ：挂载">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="some basic concpts in UE4"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -101,76 +105,29 @@
 
   <div class="container">
   	<div class="content">
-    	 <div class="page-header logo">
-  <h1>Hexo<span class="blink-fast">|</span></h1>
-</div>
+    	 
 
-<div class="row page">
 
 	
+		<div class="page-header">
+			<h1> some basic concpts in UE4</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
 	<div class="col-md-9">
 	
 
-		<div class="slogan">
+	<!-- content -->
+	<div class="mypage">		
+	  		
 
-
-		bobbiee learn there
-
-</div>    
-
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2022/07/24/bobbieeComing/" >bobbiee is coming</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2022-07-24  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h3 id="can-i-insert-a-pic-there"><a href="#can-i-insert-a-pic-there" class="headerlink" title="can i insert a pic there?"></a>can i insert a pic there?</h3>
-	
-	</div>
-  <a type="button" href="/2022/07/24/bobbieeComing/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2022/07/24/basic concpts in UE4/" >some basic concpts in UE4</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2022-07-24  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="·-简单基础概念"><a href="#·-简单基础概念" class="headerlink" title="·. 简单基础概念"></a>·. 简单基础概念</h2><h3 id="1-1-Actor"><a href="#1-1-Actor" class="headerlink" title="1.1. Actor"></a>1.1. Actor</h3><pre><code>    所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。Actor支持三维变换，例如平移、旋转和缩放。你可以通过游戏逻辑代码（C++或蓝图）创建（生成）或销毁Actor。
+	  <h2 id="·-简单基础概念"><a href="#·-简单基础概念" class="headerlink" title="·. 简单基础概念"></a>·. 简单基础概念</h2><h3 id="1-1-Actor"><a href="#1-1-Actor" class="headerlink" title="1.1. Actor"></a>1.1. Actor</h3><pre><code>    所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。Actor支持三维变换，例如平移、旋转和缩放。你可以通过游戏逻辑代码（C++或蓝图）创建（生成）或销毁Actor。
 </code></pre>
 <p>Actor的基类是AActor.<br>F<br>Actor 功能 ：挂载组件, Actor 的生命周期，官方文档：<a target="_blank" rel="noopener" href="https://docs.unrealengine.com/4.27/zh-CN/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/Actors/ActorLifecycle/">https://docs.unrealengine.com/4.27/zh-CN/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/Actors/ActorLifecycle/</a></p>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">初始化一个Actor：</span><br><span class="line"></span><br><span class="line">在蓝图中直接初始化：spawn an actor，设置transform，设置return 值为destroy，或设置life span为具体时间，到达时间后自动触发销毁</span><br><span class="line"></span><br><span class="line">在cpp中进行初始化 ： 需要使用模板和GetWorld方法，比如 </span><br><span class="line">SherylActor *actor = GetWorld()-&gt;SpawnActor&lt;SherylActor&gt;(Fvector(0,0,0),Fvector(0,0,0));</span><br><span class="line">对应的销毁方法actor-&gt;Destroy() || SetLifeSpan(1);</span><br></pre></td></tr></table></figure>
@@ -251,72 +208,94 @@
 <p>PS：动态多播代理类似于事件调度器，在actor的蓝图里创建一个新的event dispatcher,然后在关卡的蓝图里bind，如下图</p>
 <p><img src="/.%5CDynamicDelegateAndDispatcher.png" alt="在蓝图中绑定动态多播代理绑定event dispatcher"></p>
 
+	  <div class="article-footer-copyright">
+
+    <!-- 本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a> -->
+    @sherylpang
+</div>
+
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2022/07/24/bobbieeComing/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a type="button" class="btn btn-default disabled">Next<i class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2022-07-24 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
 	
 	</div>
-  <a type="button" href="/2022/07/24/basic concpts in UE4/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
-
-   
-</div>
-
-  		</center>
-		</div>
-
-		
-		
-	</div> <!-- col-md-9 -->
-
 	
-		<div class="col-md-3">
-	<div id="sidebar">
+    <hr>
 	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
-  </div>
-
+</div><!-- col-md-3 -->
 
 		
-			
-		
-			
 
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
-    
-      <li>
-        <a href="/2022/07/24/bobbieeComing/" ><i class="fa fa-file-o"></i>bobbiee is coming</a>
-      </li>
-    
-      <li>
-        <a href="/2022/07/24/basic concpts in UE4/" ><i class="fa fa-file-o"></i>some basic concpts in UE4</a>
-      </li>
-    
-  </ul>
-</div>
-
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
-
+	</div>
 	
-	
-</div> <!-- row-fluid -->
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
 	</div>
   </div>
   <div class="container-narrow">
