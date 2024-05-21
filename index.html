@@ -131,6 +131,100 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/05/17/mayaLearning/" ></a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-17  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>关于maya的一些操作</p>
+<h3 id="1-导入fbx后尺寸不对，调整当前显示的默认单位-window-gt-preference-gt-settings"><a href="#1-导入fbx后尺寸不对，调整当前显示的默认单位-window-gt-preference-gt-settings" class="headerlink" title="1. 导入fbx后尺寸不对，调整当前显示的默认单位 window-&gt;preference-&gt;settings"></a>1. 导入fbx后尺寸不对，调整当前显示的默认单位 window-&gt;preference-&gt;settings</h3><h3 id="2-动画播放的速度不对，可能是默认的播放选项不一样，window-gt-preference-gt-时间滑块"><a href="#2-动画播放的速度不对，可能是默认的播放选项不一样，window-gt-preference-gt-时间滑块" class="headerlink" title="2. 动画播放的速度不对，可能是默认的播放选项不一样，window-&gt;preference-&gt;时间滑块"></a>2. 动画播放的速度不对，可能是默认的播放选项不一样，window-&gt;preference-&gt;时间滑块</h3><h3 id="3-创建骨骼：选中模式为绑定，然后创建骨骼，按住x点鼠标左键可以吸附到网格点上"><a href="#3-创建骨骼：选中模式为绑定，然后创建骨骼，按住x点鼠标左键可以吸附到网格点上" class="headerlink" title="3. 创建骨骼：选中模式为绑定，然后创建骨骼，按住x点鼠标左键可以吸附到网格点上"></a>3. 创建骨骼：选中模式为绑定，然后创建骨骼，按住x点鼠标左键可以吸附到网格点上</h3><p><img src="/./createSkeleton.png" alt="create skeleton"></p>
+<h3 id="4-插入root骨骼，先选中原来的根节点，然后再ctrl-选中新增根节点，按下P，即可自动完成"><a href="#4-插入root骨骼，先选中原来的根节点，然后再ctrl-选中新增根节点，按下P，即可自动完成" class="headerlink" title="4. 插入root骨骼，先选中原来的根节点，然后再ctrl 选中新增根节点，按下P，即可自动完成"></a>4. 插入root骨骼，先选中原来的根节点，然后再ctrl 选中新增根节点，按下P，即可自动完成</h3><p>关于动画的一些操作</p>
+<ol>
+<li>动画有只包括skeleton的和有蒙皮的，如果项目里这两种动画都要使用，则需要先导入有骨骼的动画</li>
+<li>导入动画时可以选择导入的范围，如全部导入<code>exported time</code>，只导入有动画的部分<code>Animated time</code>，以及指定帧数的导入<code>Set Range</code></li>
+</ol>
+<p>动画重定向</p>
+<ol>
+<li>两套骨骼需要先调整到同一个姿势，可以借助摆放到同一视图来实现</li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2024/05/17/mayaLearning/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/05/13/CharaterControlling/" ></a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-13  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="1-旋转的实现"><a href="#1-旋转的实现" class="headerlink" title="1. 旋转的实现"></a>1. 旋转的实现</h2><h3 id="1-1-在人物BP下的根节点-Details-面板中，有如下的一些选项Use-Controller-Rotation-Yaw，Use-Controller-Rotation-Pitch，Use-Controller-Rotation-Roll。其对应的文档是-this-pawn’s-rotation-will-be-updated-to-match-the-player-controller"><a href="#1-1-在人物BP下的根节点-Details-面板中，有如下的一些选项Use-Controller-Rotation-Yaw，Use-Controller-Rotation-Pitch，Use-Controller-Rotation-Roll。其对应的文档是-this-pawn’s-rotation-will-be-updated-to-match-the-player-controller" class="headerlink" title="1.1 在人物BP下的根节点 Details 面板中，有如下的一些选项Use Controller Rotation Yaw，Use Controller Rotation Pitch，Use Controller Rotation Roll。其对应的文档是:this pawn’s rotation will be updated to match the player controller"></a>1.1 在人物BP下的根节点 Details 面板中，有如下的一些选项<code>Use Controller Rotation Yaw</code>，<code>Use Controller Rotation Pitch</code>，<code>Use Controller Rotation Roll</code>。其对应的文档是:this pawn’s rotation will be updated to match the player controller</h3><h3 id="1-2-在Character-Movement-面板下-Rotation-Settings"><a href="#1-2-在Character-Movement-面板下-Rotation-Settings" class="headerlink" title="1.2 在Character Movement 面板下 Rotation Settings"></a>1.2 在Character Movement 面板下 Rotation Settings</h3><p>有以下配置，可以实现适当的旋转速度和延时效果，<code>Rotation Rate</code>，<code>Use Controller Desired Rotation</code>，<code>Orient Rotation to Movement</code></p>
+
+	
+	</div>
+  <a type="button" href="/2024/05/13/CharaterControlling/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/05/12/BPClassLearn/" title="学习 UE 的一些基础概念">常用且重要的蓝图类</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="1-PlayerController"><a href="#1-PlayerController" class="headerlink" title="1. PlayerController"></a>1. PlayerController</h2><p>PlayerController 在关卡中通常可以理解为附着在 camera 上，或是第一个 activated camera上，这也可以解释摄像机接收input mouse的值并围绕着actor旋转的行为是通过去控制PlayerController去实现的。<br>功能：<br>(a) camera 的管理<br>(b) input 系统<br>(c) HUD 显示<br>(d) level 的切换<br>(e) voice 的控制</p>
+
+	
+	</div>
+  <a type="button" href="/2024/05/12/BPClassLearn/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2022/07/24/bobbieeComing/" >bobbiee is coming</a>
 		</h3>
 		</div>
@@ -399,7 +493,7 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/UE4/">UE4<span>1</span></a></li>
+			<li><a href="/categories/UE4/">UE4<span>2</span></a></li>
 		
 		</ul>
 	</div>
@@ -412,6 +506,18 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/05/17/mayaLearning/" ><i class="fa fa-file-o"></i></a>
+      </li>
+    
+      <li>
+        <a href="/2024/05/13/CharaterControlling/" ><i class="fa fa-file-o"></i></a>
+      </li>
+    
+      <li>
+        <a href="/2024/05/12/BPClassLearn/"  title="学习 UE 的一些基础概念" ><i class="fa fa-file-o"></i>常用且重要的蓝图类</a>
+      </li>
     
       <li>
         <a href="/2022/07/24/bobbieeComing/" ><i class="fa fa-file-o"></i>bobbiee is coming</a>
