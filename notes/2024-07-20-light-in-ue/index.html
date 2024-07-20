@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="Light in UE" />
+    <meta property="og:title" content="Light in UE" />
+    <meta property="twitter:title" content="Light in UE" />
     
 
     
@@ -32,40 +32,40 @@
     
 
     <meta name="keyword"  content="Mobile developing, Game developing">
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 
-    <title>Categories | Eddy的博客 | Eddy Blog</title>
+    <title>Light in UE | Eddy的博客 | Eddy Blog</title>
 
-    <link rel="canonical" href="../categories/">
-
-    
-    
-    
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-
-    
-    <link rel="stylesheet" href="../css/hugo-theme-cleanwhite.min.css">
-
-    
-    <link rel="stylesheet" href="../css/zanshang.css">
-
-    
-    <link rel="stylesheet" href="../css/font-awesome.all.min.css">
+    <link rel="canonical" href="../../notes/2024-07-20-light-in-ue/">
 
     
     
+    
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
     
-    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../css/hugo-theme-cleanwhite.min.css">
 
     
-    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/zanshang.css">
 
     
-    <script src="../js/hux-blog.min.js"></script>
+    <link rel="stylesheet" href="../../css/font-awesome.all.min.css">
 
     
-    <script src="../js/lazysizes.min.js"></script>
+    
+
+    
+    <script src="../../js/jquery.min.js"></script>
+
+    
+    <script src="../../js/bootstrap.min.js"></script>
+
+    
+    <script src="../../js/hux-blog.min.js"></script>
+
+    
+    <script src="../../js/lazysizes.min.js"></script>
 
     
     
@@ -88,7 +88,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../">Eddy Blog</a>
+            <a class="navbar-brand" href="../../">Eddy Blog</a>
         </div>
 
         
@@ -97,21 +97,21 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="../">All Posts</a>
+                        <a href="../../">All Posts</a>
                     </li>
                     
                         
                     
                     
 		    
-                        <li><a href="../archive//">ARCHIVE</a></li>
+                        <li><a href="../../archive//">ARCHIVE</a></li>
                     
-                        <li><a href="../about//">ABOUT</a></li>
+                        <li><a href="../../about//">ABOUT</a></li>
                     
-                        <li><a href="../post//">POST</a></li>
+                        <li><a href="../../post//">POST</a></li>
                     
 		            <li>
-                        <a href="../search"><i class="fa fa-search"></i></a>
+                        <a href="../../search"><i class="fa fa-search"></i></a>
 		           </li>
                 </ul>
             </div>
@@ -151,14 +151,37 @@
 
 
 
-<header class="intro-header" style="background-image: url('/img/home.jpg')">
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Eddy Blog </h1>
-                    
-		    <span class="subheading">慢就是快</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Light in UE</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Eddy Blog
+                             
+                            on 
+                            Saturday, July 20, 2024
+                            
+                            
+                            
+                            
+                    </span>
                 </div>
             </div>
         </div>
@@ -171,18 +194,99 @@
 <article>
     <div class="container">
         <div class="row">
+
             
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container">
 
-         	
+                
+                <h2 id="1-mobility--类型">1. Mobility  类型</h2>
+<table>
+<thead>
+<tr>
+<th>static</th>
+<th>stationary</th>
+<th>movable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运行时无法改变或移动</td>
+<td>除位置外其他属性可改变</td>
+<td>属性均可改变</td>
+</tr>
+</tbody>
+</table>
+<p>注意：<strong>设置光源为movable时，需要设置场景内禁止灯光贴图 <code>force No Precomputed lighting</code></strong></p>
+<h2 id="2-天光源类型">2. 天光源类型</h2>
+<p>SLS捕获场景（SLS Captured Scene）：从捕获的场景构造天空光照。任何与天光位置的距离超过天空距离阈值（Sky Distance Threshold ）的部分都将被包括在内。</p>
+<p>SLS指定立方体贴图场景（SLS Specified Cubemap）从指定的立方体贴图构造天空光照。</p>
+<h2 id="3-通过-post-process-volume-剔除不需要的eye-adaption效果">3. 通过 post process volume 剔除不需要的eye adaption效果</h2>
+<p>首先选中volume，并拖放到场景中，设置其bound 为 infinite extent
+
+  <img src="../../img/postProcessVolume.png" alt="get volume">
+
+</p>
+<p>对场景中的volue进行设置，调整模式，并调整最大与最小亮度一直
+
+  <img src="../../img/PostProcessVolumeSettings.png" alt="set volume">
+
+</p>
+<h2 id="4-collision">4. collision</h2>
+<p><a href="https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Physics/Collision/Overview/">collision官方說明文檔</a></p>
+<table>
+<thead>
+<tr>
+<th>ignore</th>
+<th>overlap</th>
+<th>block</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可以穿透过的，没有碰撞属性</td>
+<td>可以有重叠</td>
+<td>完全的两个刚体</td>
+</tr>
+</tbody>
+</table>
+<p><code>collision presets</code>属性解释<!-- raw HTML omitted -->
+<code>object type</code>：当前被设置的物体，其物理属性<!-- raw HTML omitted -->
+`object response:当前物体与其他某种类型物体产生碰撞时所产生的物理效果</p>
+<p><!-- raw HTML omitted -->注意，如果两个object的物理属性产生了冲突，则优先级顺序:block&lt;overlap&lt;ignore <!-- raw HTML omitted --></p>
+<h3 id="41-collision-新增类型">4.1 collision 新增类型</h3>
+<p>假如某个 object 的 collision 设置不符合当前设置，可以通过新增 collision channel 来解决，路径 <code>project setting</code> -&gt; <code>coliision</code> -&gt; <code>object channels</code>， 然后在想要修改 collision 类型的物体或者材质上勾选 collision 设置下的 object type，设置为刚刚新增的类型。<!-- raw HTML omitted -->
+同理，也可以在<code>project setting</code>里新增 collision preset，来保存一套collison 的配置</p>
+
+
+                
+
+                
+
                 
 
 
-
             </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
             
             <div class="
                 col-lg-8 col-lg-offset-2
@@ -239,7 +343,7 @@
             
            
                    <li>
-                       <a href='../categories/index.xml' rel="alternate" type="application/rss+xml" title="Eddy Blog" >
+                       <a href='' rel="alternate" type="application/rss+xml" title="Eddy Blog" >
                            <span class="fa-stack fa-lg">
                                <i class="fas fa-circle fa-stack-2x"></i>
                                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
