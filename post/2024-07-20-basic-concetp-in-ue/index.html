@@ -209,96 +209,87 @@
 <p>初始化一个Actor：</p>
 <p>a) 在蓝图中直接初始化：spawn an actor，设置transform，设置return 值为destroy，或设置life span为具体时间，到达时间后自动触发销毁</p>
 <p>b) 在cpp中进行初始化 ： 需要使用模板和GetWorld方法，比如
-SherylActor *actor = GetWorld()-&gt;SpawnActor<!-- raw HTML omitted -->(Fvector(0,0,0),Fvector(0,0,0));
+<code>SherylActor *actor = GetWorld()-&gt;SpawnActor&lt;SherylActor&gt;(Fvector(0,0,0),Fvector(0,0,0));</code>
 对应的销毁方法actor-&gt;Destroy() || SetLifeSpan(1);</p>
-<pre tabindex="0"><code>   
-
-### 1.2. component
-不同的负责的component 实现了 Actor 的功能
-### 1.3. UObject
-&amp;emsp;&amp;emsp;UObject提供的元数据、反射生成、GC垃圾回收、序列化、编辑器可见、Class Default Object等，UE可以构建一个Object运行的世界。
-
-a. 序列化：内存中的内容保存到磁盘 ——&gt; 存档
-
-b. 反序列化：磁盘中的内容读取到内存中
-
-c. Class Default Object：CDO本质上是一个默认的“模板”对象，由类构造函数生成，之后未修改。
-	CDO是在引擎初始化时创建的，当引擎为每个类生成UClass对象时。每个UClass的实例都是在引擎初始化期间创建的，并被分配为该UClass的CDO；序列化与反序列化时只对CDO中修改的部分操作
-
-d. __使用场景：需要用到UObject的特性时，可以继承它__
-
-## 2. 基础类型的转换
-### 2.1 
-&amp;emsp;&amp;emsp;Fstring 与 Fname 是常用的两种字符串类型，FString更贴近C++中的string，而FName比较特别，它不直接存储字符串数据， 而是通过索引值关联到真正字符串数据。FName使用一个轻型字符串系统，在此系统中，特定字符串会被重复使用，数据表也只存储一次。__FName不可变，也无法被操作__。
-
-```C++
-//FName to FString
-	FString str = TEXT(&#34;test&#34;);
-	FName name = FName(str);
-//FString to FName 
-        FString str = name.ToString();
-
-//std::string to FString
-        std::string stdStr = &#34;test&#34;;
-        FString fStr(stdstr.c_str());
-//FString to std::string
-        std::string stdStr(TCHAR_TO_UTF8(*fStr));
-//FString to int32
-        FString fStr = TEXT(&#34;test&#34;);
-        int32 intValue = FCString::Atoi(*fStr);
-        //直接用C++ 
-        int32 intValue = atoi(TCHAR_TO_UTF8((*fStr)));
-
-//FString to float
-        float fValue = FCString::Atof(*fStr);
-        fValue = atof(TCHAR_TO_UTF8(*fStr));
-//FString to bool
-        bool boolValue = fStr.ToBool();
-//int to FString
-        FString fStr = FString::FromInt(2);
-//float to FString
-        FString fStr = FString:SanitizeFloat(2.2f);
-
-//FString to char*
-        FString fStr(TEXT(&#34;test&#34;));
-        const TCHAR *charValue = *fStr;
-//FString to FText
-        FText fText = FText::FromFString(fStr);
-//FText to FName
-        FName fName = FName(*fText.ToString());
-//FString to TArray&lt;uint8&gt;
-//先将FString 转换为 char 数组， 再进行遍历
-        FString fStr(TEXT(&#34;test&#34;));
-        TArray&lt;uinit8&gt; targetArr;
-        TCHAR *charData = fStr.GetCharArray().GetData();
-        int32 len = FCString::StrLen(charData);
-        for (int i = 0; i &lt; len; i++) {
-                uint8 *dstValue = (uint8 *)TCHAR_TO_UTF8 charData;
-                targetArr.Add(*dstValue);
-                charData ++;
-        }
-        // use UE4 api
-        FBase64::DeCode(fStr, targetArr);
-//TArray&lt;uint8&gt; to FString
-        const std::string stdStr((reinterpre_cast&lt;const char *&gt;(targetArr.GetData()), targetArr.GetNum()));
-        FString fStr(stdStr.c_str());
-
-//UEnum to FString ，反射用法
-        enum ETempEnum {
-                test0,
-                test1,
-                test2
-        };
-        const UEnum *enumPtr = FindObject&lt;UEnum&gt;(ANY_PACKAGE, TEXT(&#34;ETempEnum&#34;), true);
-        if (enumPtr) {
-                FString str = enumPtr-&gt;GetNameStringByIndex(ETempEnum::test1);
-        }
-//FString to UEnum
-         const UEnum *enumPtr = FindObject&lt;UEnum&gt;(ANY_PACKAGE, TEXT(&#34;ETempEnum&#34;), true);
-        if (enumPtr) {
-                ETempEnum enumVal = (ETempEnum)enumPtr-&gt;GetIndexByNameString(TEXT&#34;test1&#34;);
-        }
-</code></pre><h3 id="22-tchar-类型说明">2.2 TCHAR 类型说明</h3>
+<h3 id="12-component">1.2. component</h3>
+<p>不同的负责的component 实现了 Actor 的功能</p>
+<h3 id="13-uobject">1.3. UObject</h3>
+<p>UObject提供的元数据、反射生成、GC垃圾回收、序列化、编辑器可见、Class Default Object等，UE可以构建一个Object运行的世界。</p>
+<p>a. 序列化：内存中的内容保存到磁盘 ——&gt; 存档</p>
+<p>b. 反序列化：磁盘中的内容读取到内存中</p>
+<p>c. Class Default Object：CDO本质上是一个默认的“模板”对象，由类构造函数生成，之后未修改。
+CDO是在引擎初始化时创建的，当引擎为每个类生成UClass对象时。每个UClass的实例都是在引擎初始化期间创建的，并被分配为该UClass的CDO；序列化与反序列化时只对CDO中修改的部分操作</p>
+<p>d. <strong>使用场景：需要用到UObject的特性时，可以继承它</strong></p>
+<h2 id="2-基础类型的转换">2. 基础类型的转换</h2>
+<h3 id="21">2.1</h3>
+<p>  Fstring 与 Fname 是常用的两种字符串类型，FString更贴近C++中的string，而FName比较特别，它不直接存储字符串数据， 而是通过索引值关联到真正字符串数据。FName使用一个轻型字符串系统，在此系统中，特定字符串会被重复使用，数据表也只存储一次。<strong>FName不可变，也无法被操作</strong>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">//FName to FString
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	FString str <span style="color:#ff79c6">=</span> TEXT(<span style="color:#f1fa8c">&#34;test&#34;</span>);
+</span></span><span style="display:flex;"><span>	FName name <span style="color:#ff79c6">=</span> FName(str);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to FName 
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FString str <span style="color:#ff79c6">=</span> name.ToString();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//std::string to FString
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        std<span style="color:#ff79c6">::</span>string stdStr <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;test&#34;</span>;
+</span></span><span style="display:flex;"><span>        FString <span style="color:#50fa7b">fStr</span>(stdstr.c_str());
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to std::string
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        std<span style="color:#ff79c6">::</span>string stdStr(TCHAR_TO_UTF8(<span style="color:#ff79c6">*</span>fStr));
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to int32
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FString fStr <span style="color:#ff79c6">=</span> TEXT(<span style="color:#f1fa8c">&#34;test&#34;</span>);
+</span></span><span style="display:flex;"><span>        int32 intValue <span style="color:#ff79c6">=</span> FCString<span style="color:#ff79c6">::</span>Atoi(<span style="color:#ff79c6">*</span>fStr);
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">//直接用C++ 
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        int32 intValue <span style="color:#ff79c6">=</span> atoi(TCHAR_TO_UTF8((<span style="color:#ff79c6">*</span>fStr)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to float
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#8be9fd">float</span> fValue <span style="color:#ff79c6">=</span> FCString<span style="color:#ff79c6">::</span>Atof(<span style="color:#ff79c6">*</span>fStr);
+</span></span><span style="display:flex;"><span>        fValue <span style="color:#ff79c6">=</span> atof(TCHAR_TO_UTF8(<span style="color:#ff79c6">*</span>fStr));
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to bool
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#8be9fd">bool</span> boolValue <span style="color:#ff79c6">=</span> fStr.ToBool();
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//int to FString
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FString fStr <span style="color:#ff79c6">=</span> FString<span style="color:#ff79c6">::</span>FromInt(<span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//float to FString
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FString fStr <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">FString</span>:SanitizeFloat(<span style="color:#bd93f9">2.2f</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to char*
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FString <span style="color:#50fa7b">fStr</span>(TEXT(<span style="color:#f1fa8c">&#34;test&#34;</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">const</span> TCHAR <span style="color:#ff79c6">*</span>charValue <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">*</span>fStr;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to FText
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FText fText <span style="color:#ff79c6">=</span> FText<span style="color:#ff79c6">::</span>FromFString(fStr);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FText to FName
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FName fName <span style="color:#ff79c6">=</span> FName(<span style="color:#ff79c6">*</span>fText.ToString());
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to TArray&lt;uint8&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">//先将FString 转换为 char 数组， 再进行遍历
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FString <span style="color:#50fa7b">fStr</span>(TEXT(<span style="color:#f1fa8c">&#34;test&#34;</span>));
+</span></span><span style="display:flex;"><span>        TArray<span style="color:#ff79c6">&lt;</span>uinit8<span style="color:#ff79c6">&gt;</span> targetArr;
+</span></span><span style="display:flex;"><span>        TCHAR <span style="color:#ff79c6">*</span>charData <span style="color:#ff79c6">=</span> fStr.GetCharArray().GetData();
+</span></span><span style="display:flex;"><span>        int32 len <span style="color:#ff79c6">=</span> FCString<span style="color:#ff79c6">::</span>StrLen(charData);
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>; i <span style="color:#ff79c6">&lt;</span> len; i<span style="color:#ff79c6">++</span>) {
+</span></span><span style="display:flex;"><span>                uint8 <span style="color:#ff79c6">*</span>dstValue <span style="color:#ff79c6">=</span> (uint8 <span style="color:#ff79c6">*</span>)TCHAR_TO_UTF8 charData;
+</span></span><span style="display:flex;"><span>                targetArr.Add(<span style="color:#ff79c6">*</span>dstValue);
+</span></span><span style="display:flex;"><span>                charData <span style="color:#ff79c6">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// use UE4 api
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        FBase64<span style="color:#ff79c6">::</span>DeCode(fStr, targetArr);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//TArray&lt;uint8&gt; to FString
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string stdStr((reinterpre_cast<span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">const</span> <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*&gt;</span>(targetArr.GetData()), targetArr.GetNum()));
+</span></span><span style="display:flex;"><span>        FString <span style="color:#50fa7b">fStr</span>(stdStr.c_str());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//UEnum to FString ，反射用法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">ETempEnum</span> {
+</span></span><span style="display:flex;"><span>                test0,
+</span></span><span style="display:flex;"><span>                test1,
+</span></span><span style="display:flex;"><span>                test2
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">const</span> UEnum <span style="color:#ff79c6">*</span>enumPtr <span style="color:#ff79c6">=</span> FindObject<span style="color:#ff79c6">&lt;</span>UEnum<span style="color:#ff79c6">&gt;</span>(ANY_PACKAGE, TEXT(<span style="color:#f1fa8c">&#34;ETempEnum&#34;</span>), <span style="color:#8be9fd;font-style:italic">true</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> (enumPtr) {
+</span></span><span style="display:flex;"><span>                FString str <span style="color:#ff79c6">=</span> enumPtr<span style="color:#ff79c6">-&gt;</span>GetNameStringByIndex(ETempEnum<span style="color:#ff79c6">::</span>test1);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//FString to UEnum
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>         <span style="color:#ff79c6">const</span> UEnum <span style="color:#ff79c6">*</span>enumPtr <span style="color:#ff79c6">=</span> FindObject<span style="color:#ff79c6">&lt;</span>UEnum<span style="color:#ff79c6">&gt;</span>(ANY_PACKAGE, TEXT(<span style="color:#f1fa8c">&#34;ETempEnum&#34;</span>), <span style="color:#8be9fd;font-style:italic">true</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> (enumPtr) {
+</span></span><span style="display:flex;"><span>                ETempEnum enumVal <span style="color:#ff79c6">=</span> (ETempEnum)enumPtr<span style="color:#ff79c6">-&gt;</span>GetIndexByNameString(TEXT<span style="color:#f1fa8c">&#34;test1&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><h3 id="22-tchar-类型说明">2.2 TCHAR 类型说明</h3>
 <p>  C++ 支持两种字符：ANSI编码（使用&quot;&ldquo;包裹）和Unicode编码（使用L&quot;&ldquo;包裹）,导致对不同字符处理的方式不同。为了将其统一，微软定义了 TCHAR，通过条件编译（_UNICODE和UNICODE宏）控制实际使用的字符集，即：</p>
 <p>  当没有定义_UNICODE宏时，程序编译为 ANSI，TCHAR = char；</p>
 <p>  当定义了_UNICODE宏时，程序编译为 UNICODE，TCHAR = wchar_t ；</p>
@@ -510,37 +501,35 @@ DECLARE_DYNAMIC_DELEGATE_RetVal_OnePram(float, FDynamicDegate, int32, intVal);</
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">virtual</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">OnComponentCreated</span>() <span style="color:#ff79c6">override</span>; <span style="color:#6272a4">//组件RegisterComponent注册的时候立即调用，一般这里做初始化工作
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">virtual</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">OnComponentDestroyed</span>(<span style="color:#8be9fd">bool</span> bDestroyingHierarchy) <span style="color:#ff79c6">override</span>;<span style="color:#6272a4">//立即调用，一般这里做清理工作（只要DestroyComponent就会调用）
 </span></span></span></code></pre></div><h4 id="42-subsystem">4.2 subsystem</h4>
-<p>  为什么要使用 Subsystems</p>
+<p>为什么要使用 Subsystems<!-- raw HTML omitted --></p>
 <ol>
-<li>更适用的生命周期
-引擎只支持一个 GameInstance ，运行周期是整个引擎的生命周期
-自定义 ManagerActor，生命周期一般为当前 level 的生命周期
-Subsystems 的生命周期可以依存于Engine，Editor，World，LocalPlayer</li>
-<li>更简
-GameInstance 或者自定义 ManagerActor，需要手动维控制创建、释放
-Subsystems 自动创建、释放，提供 Initialize()、Deinitialize()，并且可重载</li>
-<li>更模块化、更优雅、更封装、更易于维护、移植复用
-GameInstance 中将任务系统，计分系统，经济系统、对话系统等多个Manager 写在一起，会变得臃肿
-模块间的数据访问封装不够良好，容易污染
-不利于业务逻辑模块的复用，特别是需要进行移植的时候，以及多个插件同时都有自己的 GameInstance
-Subsystems 可以为不同的 Manager 创建对应的Subsystems
-如 Manager 划分，
-任务系统Subsystem : UGameInstanceSubsystem
-计分系统Subsystem : UGameInstanceSubsystem
-经济系统Subsystem : UGameInstanceSubsystem
-对话系统Subsystem : UGameInstanceSubsystem
-更模块化，代码显得优雅
-解耦性高，易于维护、分工协作；易于移植复用
-模块间的数据访问具有更好的封装性</li>
-<li>更友好的访问接口
-Subsystem 更像以全局变量的形式来访问
-提供了 Python 脚本的访问，用于编写编辑器脚本或编写测试代码</li>
-<li>Subsystem 无需覆盖引擎类。
-一套可以定义、自动实例化和释放的类的框架。可以将其理解为 GamePlay 级别的 Component
+<li>更适用的生命周期<!-- raw HTML omitted -->
+引擎只支持一个 GameInstance ，运行周期是整个引擎的生命周期<!-- raw HTML omitted -->
+自定义 ManagerActor，生命周期一般为当前 level 的生命周期<!-- raw HTML omitted -->
+Subsystems 的生命周期可以依存于Engine，Editor，World，LocalPlayer<!-- raw HTML omitted --></li>
+<li>更简单<!-- raw HTML omitted -->
+GameInstance 或者自定义 ManagerActor，需要手动维控制创建、释放<!-- raw HTML omitted -->
+Subsystems 自动创建、释放，提供 Initialize()、Deinitialize()，并且可重载<!-- raw HTML omitted --></li>
+<li>更模块化、更优雅、更封装、更易于维护、移植复用<!-- raw HTML omitted --></li>
+<li>GameInstance 中将任务系统，计分系统，经济系统、对话系统等多个Manager 写在一起，会变得臃肿<!-- raw HTML omitted -->
+模块间的数据访问封装不够良好，容易污染<!-- raw HTML omitted -->
+不利于业务逻辑模块的复用，特别是需要进行移植的时候，以及多个插件同时都有自己的 GameInstance<!-- raw HTML omitted -->
+Subsystems 可以为不同的 Manager 创建对应的Subsystems<!-- raw HTML omitted -->
+如 Manager 划分，<!-- raw HTML omitted -->
+任务系统Subsystem : UGameInstanceSubsystem;<!-- raw HTML omitted -->
+计分系统Subsystem : UGameInstanceSubsystem;<!-- raw HTML omitted -->
+经济系统Subsystem : UGameInstanceSubsystem;<!-- raw HTML omitted -->
+对话系统Subsystem : UGameInstanceSubsystem.<!-- raw HTML omitted --></li>
+<li>更友好的访问接口<!-- raw HTML omitted -->
+Subsystem 更像以全局变量的形式来访问<!-- raw HTML omitted -->
+提供了 Python 脚本的访问，用于编写编辑器脚本或编写测试代码<!-- raw HTML omitted --></li>
+<li>Subsystem 无需覆盖引擎类。<!-- raw HTML omitted -->
+一套可以定义、自动实例化和释放的类的框架。可以将其理解为 GamePlay 级别的 Component<!-- raw HTML omitted --></li>
+</ol>
 <table>
 <thead>
 <tr>
-<th>subsystem</th>
+<th>subsystem类型</th>
 <th>定义及用法</th>
 </tr>
 </thead>
@@ -567,8 +556,6 @@ Subsystem 更像以全局变量的形式来访问
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
 <h4 id="43-模块">4.3 模块</h4>
 <h4 id="431-定义">4.3.1 定义</h4>
 <p>模块是通过C#源文件声明的，扩展名为.build.cs，存储在项目的 源（Source） 目录下。属于一个模块的C++源代码与.build.cs文件并列存储，或者存储在它的子目录中。每个.build.cs文件都声明一个类，从ModuleRules基类衍生而来，并设置属性来控制如何从其构造函数进行构建。</p>
@@ -605,13 +592,13 @@ Subsystem 更像以全局变量的形式来访问
 </table>
 <h4 id="433-其他">4.3.3 其他</h4>
 <ol>
-<li>模块之间的使用类似于引用库，需要在.cs里面声明引入了其他模块</li>
-<li>模块接口 IModuleInterface
-模块加载函数 StartupModule()
-模块卸载函数 ShutdownModule()</li>
-<li>一个插件可以有多个模块，但是有且只有一个主模块</li>
-<li>虚幻引擎通过在磁盘上搜索 .uplugin 文件来查找插件。将此类文件称为 插件描述文件。运行此类程序时，引擎、编辑器和 UnrealBuildTool（UBT）将自动发现并自动加载插件描述文件。</li>
-<li>uproject 和 uplugin 很像，都是json格式，具体格式可参考官方文档。</li>
+<li>模块之间的使用类似于引用库，需要在.cs里面声明引入了其他模块<!-- raw HTML omitted --></li>
+<li>模块接口 IModuleInterface <!-- raw HTML omitted -->
+模块加载函数 StartupModule()<!-- raw HTML omitted -->
+模块卸载函数 ShutdownModule()<!-- raw HTML omitted --></li>
+<li>一个插件可以有多个模块，但是有且只有一个主模块<!-- raw HTML omitted --></li>
+<li>虚幻引擎通过在磁盘上搜索 .uplugin 文件来查找插件。将此类文件称为 插件描述文件。运行此类程序时，引擎、编辑器和 UnrealBuildTool（UBT）将自动发现并自动加载插件描述文件。<!-- raw HTML omitted --></li>
+<li>uproject 和 uplugin 很像，都是json格式，具体格式可参考官方文档。<!-- raw HTML omitted --></li>
 </ol>
 
 
