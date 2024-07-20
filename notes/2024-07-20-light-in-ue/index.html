@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="Maya Learning" />
-    <meta property="og:title" content="Maya Learning" />
-    <meta property="twitter:title" content="Maya Learning" />
+    <meta name="title" content="Light in UE" />
+    <meta property="og:title" content="Light in UE" />
+    <meta property="twitter:title" content="Light in UE" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Mobile developing, Game developing">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
-    <title>Maya Learning | Eddy的博客 | Eddy Blog</title>
+    <title>Light in UE | Eddy的博客 | Eddy Blog</title>
 
-    <link rel="canonical" href="../../post/readme/">
+    <link rel="canonical" href="../../notes/2024-07-20-light-in-ue/">
 
     
     
@@ -167,13 +167,13 @@
                     <div class="tags">
                         
                     </div>
-                    <h1>Maya Learning</h1>
-                    <h2 class="subheading">Some basic operations about maya</h2>
+                    <h1>Light in UE</h1>
+                    <h2 class="subheading"></h2>
                     <span class="meta">
                         
                             Posted by 
                             
-                                Eddy
+                                    Eddy Blog
                              
                             on 
                             Saturday, July 20, 2024
@@ -202,67 +202,67 @@
                 post-container">
 
                 
-                <h2 id="关于maya的一些操作">关于maya的一些操作</h2>
-<h3 id="1-导入fbx后尺寸不对调整当前显示的默认单位-window-preference-settings">1. 导入fbx后尺寸不对，调整当前显示的默认单位 window-&gt;preference-&gt;settings</h3>
-<h3 id="2-动画播放的速度不对可能是默认的播放选项不一样window-preference-时间滑块">2. 动画播放的速度不对，可能是默认的播放选项不一样，window-&gt;preference-&gt;时间滑块</h3>
-<h3 id="3-创建骨骼选中模式为绑定然后创建骨骼按住x点鼠标左键可以吸附到网格点上">3. 创建骨骼：选中模式为绑定，然后创建骨骼，按住x点鼠标左键可以吸附到网格点上</h3>
-<p>
-  <img src="../../img/createSkeleton.png" alt="create skeleton">
+                <h2 id="1-mobility--类型">1. Mobility  类型</h2>
+<table>
+<thead>
+<tr>
+<th>static</th>
+<th>stationary</th>
+<th>movable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运行时无法改变或移动</td>
+<td>除位置外其他属性可改变</td>
+<td>属性均可改变</td>
+</tr>
+</tbody>
+</table>
+<p>注意：<strong>设置光源为movable时，需要设置场景内禁止灯光贴图 <code>force No Precomputed lighting</code></strong></p>
+<h2 id="2-天光源类型">2. 天光源类型</h2>
+<p>SLS捕获场景（SLS Captured Scene）：从捕获的场景构造天空光照。任何与天光位置的距离超过天空距离阈值（Sky Distance Threshold ）的部分都将被包括在内。</p>
+<p>SLS指定立方体贴图场景（SLS Specified Cubemap）从指定的立方体贴图构造天空光照。</p>
+<h2 id="3-通过-post-process-volume-剔除不需要的eye-adaption效果">3. 通过 post process volume 剔除不需要的eye adaption效果</h2>
+<p>首先选中volume，并拖放到场景中，设置其bound 为 infinite extent
+
+  <img src="../../img/postProcessVolume.png" alt="get volume">
 
 </p>
-<h3 id="4-插入root骨骼先选中原来的根节点然后再ctrl-选中新增根节点按下p即可自动完成">4. 插入root骨骼，先选中原来的根节点，然后再ctrl 选中新增根节点，按下P，即可自动完成</h3>
-<h2 id="关于动画的一些操作">关于动画的一些操作</h2>
-<ol>
-<li>动画有只包括skeleton的和有蒙皮的，如果项目里这两种动画都要使用，则需要先导入有骨骼的动画</li>
-<li>导入动画时可以选择导入的范围，如全部导入<code>exported time</code>，只导入有动画的部分<code>Animated time</code>，以及指定帧数的导入<code>Set Range</code></li>
-</ol>
-<p>动画重定向</p>
-<ol>
-<li>
-<p>两套骨骼需要先调整到同一个姿势，可以借助摆放到同一视图来实现，具体操作步骤：
-1.1 需要修改姿势的人物，对照需要修改的姿势进行修改
-1.2 选择 RetargetManager，选择  Modify Pose
-1.3 在修改姿势的人物，选择RetargetManager -&gt; Select Rig -&gt; Select Humanoid Rig，对照着参考的骨骼，将新的骨骼绑定到标准名称
+<p>对场景中的volue进行设置，调整模式，并调整最大与最小亮度一直
 
-  <img src="../../img/changeSkeletonName.png" alt="change skeleton name">
+  <img src="../../img/PostProcessVolumeSettings.png" alt="set volume">
 
 </p>
-</li>
-<li>
-<p>选中某个动画，Retarget Anim Blueprint, 如果出现了source或target为空白，需要确保目标 skeleton 拥有不为空的preview mesh</p>
-</li>
-<li>
-<p>如果发现转换后的动画在高度或者比-例上不一致，可以回到原来的骨骼设置，对节点进行retarget的模式设置
-
-  <img src="../../img/adjustSkeletonMode.png" alt="adjust the retarget mode">
-
-</p>
-</li>
-</ol>
-<h2 id="blend-space-参数说明">Blend Space 参数说明</h2>
-<ol>
-<li>interpolation time:Interpolation Time for input, when it gets input, it will use this time to interpolate to target. Used for smoother interpolation.简单说就是让动画的过渡更流畅。</li>
-<li>动画的播放速率是可以调整的，在Blend Space里可以调整动画的rate scale</li>
-</ol>
-<p>state machine</p>
-<ol>
-<li>state 里还可以添加 state machine</li>
-</ol>
+<h2 id="4-collision">4. collision</h2>
+<p><a href="https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Physics/Collision/Overview/">collision官方說明文檔</a></p>
+<table>
+<thead>
+<tr>
+<th>ignore</th>
+<th>overlap</th>
+<th>block</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可以穿透过的，没有碰撞属性</td>
+<td>可以有重叠</td>
+<td>完全的两个刚体</td>
+</tr>
+</tbody>
+</table>
+<p><code>collision presets</code>属性解释<!-- raw HTML omitted -->
+<code>object type</code>：当前被设置的物体，其物理属性<!-- raw HTML omitted -->
+`object response:当前物体与其他某种类型物体产生碰撞时所产生的物理效果</p>
+<p><!-- raw HTML omitted -->注意，如果两个object的物理属性产生了冲突，则优先级顺序:block&lt;overlap&lt;ignore <!-- raw HTML omitted --></p>
+<h3 id="41-collision-新增类型">4.1 collision 新增类型</h3>
+<p>假如某个 object 的 collision 设置不符合当前设置，可以通过新增 collision channel 来解决，路径 <code>project setting</code> -&gt; <code>coliision</code> -&gt; <code>object channels</code>， 然后在想要修改 collision 类型的物体或者材质上勾选 collision 设置下的 object type，设置为刚刚新增的类型。<!-- raw HTML omitted -->
+同理，也可以在<code>project setting</code>里新增 collision preset，来保存一套collison 的配置</p>
 
 
                 
 
-                
-                <hr>
-                <ul class="pager">
-                    
-                    
-                    <li class="next">
-                        <a href="../../post/2024-07-20-new-post/" data-toggle="tooltip" data-placement="top" title="简单基础概念">Next
-                            Post &rarr;</a>
-                    </li>
-                    
-                </ul>
                 
 
                 

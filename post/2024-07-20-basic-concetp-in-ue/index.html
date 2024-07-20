@@ -10,8 +10,8 @@
     <meta property="og:type" content="article">
 
     
-    <meta property="og:image" content="http://localhost:1313//img/home.jpg">
-    <meta property="twitter:image" content="http://localhost:1313//img/home.jpg" />
+    <meta property="og:image" content="//www.bobbiee.com:1313//img/home.jpg">
+    <meta property="twitter:image" content="//www.bobbiee.com:1313//img/home.jpg" />
     
 
     
@@ -32,40 +32,40 @@
     
 
     <meta name="keyword"  content="Mobile developing, Game developing">
-    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 
     <title>简单基础概念 | Eddy的博客 | Eddy Blog</title>
 
-    <link rel="canonical" href="/notes/test/">
+    <link rel="canonical" href="../../post/2024-07-20-basic-concetp-in-ue/">
 
     
     
     
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+    <link rel="stylesheet" href="../../css/hugo-theme-cleanwhite.min.css">
 
     
-    <link rel="stylesheet" href="/css/zanshang.css">
+    <link rel="stylesheet" href="../../css/zanshang.css">
 
     
-    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.all.min.css">
 
     
     
 
     
-    <script src="/js/jquery.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
 
     
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
 
     
-    <script src="/js/hux-blog.min.js"></script>
+    <script src="../../js/hux-blog.min.js"></script>
 
     
-    <script src="/js/lazysizes.min.js"></script>
+    <script src="../../js/lazysizes.min.js"></script>
 
     
     
@@ -88,7 +88,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Eddy Blog</a>
+            <a class="navbar-brand" href="../../">Eddy Blog</a>
         </div>
 
         
@@ -97,21 +97,21 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/">All Posts</a>
+                        <a href="../../">All Posts</a>
                     </li>
                     
                         
                     
                     
 		    
-                        <li><a href="/archive//">ARCHIVE</a></li>
+                        <li><a href="../../archive//">ARCHIVE</a></li>
                     
-                        <li><a href="/about//">ABOUT</a></li>
+                        <li><a href="../../about//">ABOUT</a></li>
                     
-                        <li><a href="/post//">POST</a></li>
+                        <li><a href="../../post//">POST</a></li>
                     
 		            <li>
-                        <a href="/search"><i class="fa fa-search"></i></a>
+                        <a href="../../search"><i class="fa fa-search"></i></a>
 		           </li>
                 </ul>
             </div>
@@ -205,19 +205,18 @@
                 <h2 id="1-简单基础概念">1. 简单基础概念</h2>
 <h3 id="11-actor">1.1. Actor</h3>
 <p>  所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。Actor支持三维变换，例如平移、旋转和缩放。你可以通过游戏逻辑代码（C++或蓝图）创建（生成）或销毁Actor。</p>
-<p>Actor的基类是AActor.</p>
-<p>Actor 功能 ：挂载组件, Actor 的生命周期，官方文档：https://docs.unrealengine.com/4.27/zh-CN/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/Actors/ActorLifecycle/</p>
-<pre tabindex="0"><code>初始化一个Actor：
+<p>  Actor 功能 ：挂载组件, Actor 的生命周期，官方文档：https://docs.unrealengine.com/4.27/zh-CN/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/Actors/ActorLifecycle/</p>
+<pre tabindex="0"><code>&amp;emsp;&amp;emsp;初始化一个Actor：
 
-在蓝图中直接初始化：spawn an actor，设置transform，设置return 值为destroy，或设置life span为具体时间，到达时间后自动触发销毁
+a) 在蓝图中直接初始化：spawn an actor，设置transform，设置return 值为destroy，或设置life span为具体时间，到达时间后自动触发销毁
 
-在cpp中进行初始化 ： 需要使用模板和GetWorld方法，比如 
+b) 在cpp中进行初始化 ： 需要使用模板和GetWorld方法，比如 
 SherylActor *actor = GetWorld()-&gt;SpawnActor&lt;SherylActor&gt;(Fvector(0,0,0),Fvector(0,0,0));
 对应的销毁方法actor-&gt;Destroy() || SetLifeSpan(1);
 </code></pre><h3 id="12-component">1.2. component</h3>
 <p>不同的负责的component 实现了 Actor 的功能</p>
 <h3 id="13-uobject">1.3. UObject</h3>
-<p>UObject提供的元数据、反射生成、GC垃圾回收、序列化、编辑器可见、Class Default Object等，UE可以构建一个Object运行的世界。</p>
+<p>  UObject提供的元数据、反射生成、GC垃圾回收、序列化、编辑器可见、Class Default Object等，UE可以构建一个Object运行的世界。</p>
 <p>a. 序列化：内存中的内容保存到磁盘 ——&gt; 存档</p>
 <p>b. 反序列化：磁盘中的内容读取到内存中</p>
 <p>c. Class Default Object：CDO本质上是一个默认的“模板”对象，由类构造函数生成，之后未修改。
@@ -339,13 +338,13 @@ CDO是在引擎初始化时创建的，当引擎为每个类生成UClass对象�
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">// 　　 　 [capture](parameters){body}
 </span></span></span></code></pre></div><h3 id="使用方法">使用方法</h3>
-<h4 id="emspemsp-使用declare_宏声明一个delegate类型-fdelegatexxx">  · 使用DECLARE_*宏声明一个delegate类型 FDelegateXXX</h4>
+<p><strong>· 使用DECLARE_*宏声明一个delegate类型 FDelegateXXX</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">//cpp文件开头
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>DECLARE_DELEGATE_RetVal_TwoParams(int32, FDelegateTwoParams, <span style="color:#8be9fd">float</span>, <span style="color:#ff79c6">const</span> FString <span style="color:#ff79c6">&amp;</span>);
-</span></span></code></pre></div><h4 id="emspemsp-声明一个-fdelegatexxx-类型的代理对象">  · 声明一个 FDelegateXXX 类型的代理对象</h4>
+</span></span></code></pre></div><p><strong>· 声明一个 FDelegateXXX 类型的代理对象</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">//cpp class中声明一个对应代理类型的变量
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>FDelegateTwoParmas fDelegate;
-</span></span></code></pre></div><h4 id="emspemsp-绑定需要执行的函数指针到代理对象上">  · 绑定需要执行的函数指针到代理对象上</h4>
+</span></span></code></pre></div><p><strong>· 绑定需要执行的函数指针到代理对象上</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">//eg. 在Actor类中BeginPlaty方法中绑定，这里第一个参数传 this 是因为写在类里的成员方法中，要绑定自己对应类中的方法
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4">//绑定一个继承自UObject的类里的方法
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>fDelegate<span style="color:#ff79c6">::</span>BindUObject(<span style="color:#ff79c6">this</span>, <span style="color:#ff79c6">&amp;</span>your_corresponding_function);
@@ -368,17 +367,17 @@ CDO是在引擎初始化时创建的，当引擎为每个类生成UClass对象�
 </span></span><span style="display:flex;"><span>fDelegate<span style="color:#ff79c6">::</span>BindThreadSafeSP(aPtr1.ToSharedRef(). <span style="color:#ff79c6">&amp;</span>A<span style="color:#ff79c6">::</span>funcA);
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">//eg.通过函数名找到函数并绑定到代理
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>fDelegate<span style="color:#ff79c6">::</span>BindUFunction(<span style="color:#ff79c6">this</span>, FName(<span style="color:#f1fa8c">&#34;your_function_name_in_this_class&#34;</span>));
-</span></span></code></pre></div><h4 id="emspemsp-触发代理对象中的函数指针会立即执行">  · 触发代理对象中的函数指针会立即执行</h4>
+</span></span></code></pre></div><p><strong>· 触发代理对象中的函数指针会立即执行</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">//执行时需要判断是否绑定
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">if</span> (fDelegate.IsBond()) {
 </span></span><span style="display:flex;"><span>        fDelegate.Excute(<span style="color:#bd93f9">11</span>, <span style="color:#f1fa8c">&#34;ddd&#34;</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">// no return val you can call
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>fDelegate.ExecuteIfBound()
-</span></span></code></pre></div><h4 id="emspemsp-不需要某个函数指针时可将其从代理对象上解绑">  · 不需要某个函数指针时，可将其从代理对象上解绑</h4>
+</span></span></code></pre></div><p><strong>· 不需要某个函数指针时，可将其从代理对象上解绑</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>fDelegate.Unbind();
 </span></span></code></pre></div><h4 id="32-多播代理">3.2 多播代理</h4>
-<p>一对多，触发时可以执行多个函数，但无法确定多个函数的执行顺序，且多播代理无返回值。</p>
+<p>  一对多，触发时可以执行多个函数，但无法确定多个函数的执行顺序，且多播代理无返回值。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">//声明
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>DECLARE_MULTICAST_DELEGATE_TwoParms(FMultiDelegate, <span style="color:#8be9fd">float</span> a, <span style="color:#ff79c6">const</span> FString <span style="color:#ff79c6">&amp;</span>fStr);
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">//绑定函数时使用的是AddXXX 
@@ -386,7 +385,7 @@ CDO是在引擎初始化时创建的，当引擎为每个类生成UClass对象�
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">// 执行时利用广播，不需要判断是否有效
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>FMultiDelegate.Broadcast(<span style="color:#bd93f9">33f</span>, <span style="color:#f1fa8c">&#34;test&#34;</span>);
 </span></span></code></pre></div><h4 id="33-动态代理">3.3 动态代理</h4>
-<p>可以暴露给蓝图使用的代理。</p>
+<p>  可以暴露给蓝图使用的代理。</p>
 <h4 id="331-动态单播代理">3.3.1 动态单播代理</h4>
 <p><strong>注意命名规则是强制的，以F开头,且声明代理时需要给参数声明参数名</strong>
 DECLARE_DYNAMIC_DELEGATE(FDynamicDegate);
@@ -396,11 +395,11 @@ DECLARE_DYNAMIC_DELEGATE_RetVal_OnePram(float, FDynamicDegate, int32, intVal);</
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>UFUNCTION(BlueprintCallable)
 </span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> testdynamicdelegate(FDynamicDelegate fdynamicdelegate);
 </span></span></code></pre></div><p>
-  <img src="../../public/img/dynamicDelegateExample.png" alt="动态单播代理蓝图示意">
+  <img src="../../img/dynamicDelegateExample.png" alt="动态单播代理蓝图示意">
 
 </p>
 <h4 id="332-动态多播代理">3.3.2 动态多播代理</h4>
-<p>多播没有返回值。</p>
+<p>  <strong>多播没有返回值。</strong></p>
 <table>
 <thead>
 <tr>
@@ -422,9 +421,9 @@ DECLARE_DYNAMIC_DELEGATE_RetVal_OnePram(float, FDynamicDegate, int32, intVal);</
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>UFUNCTION(BluprintAssianable)
 </span></span><span style="display:flex;"><span>FDyMuDelegate fDelegate;
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">//打开关卡蓝图，可以对actor 绑定事件
-</span></span></span></code></pre></div><p>PS：动态多播代理类似于事件调度器，在actor的蓝图里创建一个新的event dispatcher,然后在关卡的蓝图里bind，如下图</p>
+</span></span></span></code></pre></div><p>PS：<strong>动态多播代理类似于事件调度器，在actor的蓝图里创建一个新的event dispatcher,然后在关卡的蓝图里bind</strong>，如下图</p>
 <p>
-  <img src="../../public/img/DynamicDelegateAndDispatcher.png" alt="在蓝图中绑定动态多播代理绑定event dispatcher">
+  <img src="../../img/DynamicDelegateAndDispatcher.png" alt="在蓝图中绑定动态多播代理绑定event dispatcher">
 
 </p>
 <h3 id="4-其他">4. 其他</h3>
@@ -504,7 +503,7 @@ DECLARE_DYNAMIC_DELEGATE_RetVal_OnePram(float, FDynamicDegate, int32, intVal);</
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">virtual</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">OnComponentCreated</span>() <span style="color:#ff79c6">override</span>; <span style="color:#6272a4">//组件RegisterComponent注册的时候立即调用，一般这里做初始化工作
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">virtual</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">OnComponentDestroyed</span>(<span style="color:#8be9fd">bool</span> bDestroyingHierarchy) <span style="color:#ff79c6">override</span>;<span style="color:#6272a4">//立即调用，一般这里做清理工作（只要DestroyComponent就会调用）
 </span></span></span></code></pre></div><h4 id="42-subsystem">4.2 subsystem</h4>
-<p>为什么要使用 Subsystems</p>
+<p>  为什么要使用 Subsystems</p>
 <ol>
 <li>更适用的生命周期
 引擎只支持一个 GameInstance ，运行周期是整个引擎的生命周期
@@ -612,6 +611,17 @@ Subsystem 更像以全局变量的形式来访问
                 
 
                 
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="../../post/2024-07-20-new-post/" data-toggle="tooltip" data-placement="top" title="简单基础概念">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
 
                 
 
@@ -645,14 +655,6 @@ Subsystem 更像以全局变量的形式来访问
                 
 
                 
-                
-                <section>
-                    <hr>
-                    <h5>FRIENDS</h5>
-                    <ul class="list-inline">
-                        
-                    </ul>
-                </section>
                 
             </div>
         </div>
