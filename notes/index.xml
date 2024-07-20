@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on Eddy Blog</title>
+    <link>http://localhost:1313/notes/</link>
+    <description>Recent content in Notes on Eddy Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Jul 2024 13:22:46 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>简单基础概念</title>
+      <link>http://localhost:1313/notes/test/</link>
+      <pubDate>Sat, 20 Jul 2024 13:22:46 +0800</pubDate>
+      <guid>http://localhost:1313/notes/test/</guid>
+      <description>1. 简单基础概念 1.1. Actor 所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。Actor支持三维变换，例如平移、旋转和缩放。</description>
+    </item>
+  </channel>
+</rss>
