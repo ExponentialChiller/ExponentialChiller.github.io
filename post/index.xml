@@ -2,31 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Eddy Blog</title>
-    <link>https://www.bobbiee.com/post/</link>
+    <link>http://localhost:1313/post/</link>
     <description>Recent content in Posts on Eddy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jul 2024 13:22:46 +0800</lastBuildDate>
-    <atom:link href="https://www.bobbiee.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ue Modules Learning</title>
+      <link>http://localhost:1313/post/2024-08-10-modules-in-ue/</link>
+      <pubDate>Sat, 10 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2024-08-10-modules-in-ue/</guid>
+      <description>1. 重要概念 1.1. Target Target 即编译目标，UE 支持多种编译 target 类型 public enum TargetType { /// &amp;lt;summary&amp;gt; /// Cooked monolithic game executable (GameName.exe). Also used for a game-agnostic engine executable (UE4Game.exe or RocketGame.exe) /// &amp;lt;/summary&amp;gt; Game, /// &amp;lt;summary&amp;gt; /// Uncooked modular editor executable and DLLs (UE4Editor.exe, UE4Editor*.dll, GameName*.dll) /// &amp;lt;/summary&amp;gt; Editor, /// &amp;lt;summary&amp;gt; /// Cooked monolithic</description>
+    </item>
     <item>
       <title>Light in UE</title>
-      <link>https://www.bobbiee.com/post/2024-07-20-light-in-ue/</link>
+      <link>http://localhost:1313/post/2024-07-20-light-in-ue/</link>
       <pubDate>Sat, 20 Jul 2024 13:22:46 +0800</pubDate>
-      <guid>https://www.bobbiee.com/post/2024-07-20-light-in-ue/</guid>
+      <guid>http://localhost:1313/post/2024-07-20-light-in-ue/</guid>
       <description>1. Mobility 类型 static stationary movable 运行时无法改变或移动 除位置外其他属性可改变 属性均可改变 注意：设置光源为movable时，需要设置场景内禁止灯光贴图 force No Precomputed lighting 2. 天</description>
     </item>
     <item>
       <title>简单基础概念</title>
-      <link>https://www.bobbiee.com/post/2024-07-20-basic-concetp-in-ue/</link>
+      <link>http://localhost:1313/post/2024-07-20-basic-concetp-in-ue/</link>
       <pubDate>Sat, 20 Jul 2024 13:22:46 +0800</pubDate>
-      <guid>https://www.bobbiee.com/post/2024-07-20-basic-concetp-in-ue/</guid>
+      <guid>http://localhost:1313/post/2024-07-20-basic-concetp-in-ue/</guid>
       <description>1. 简单基础概念 1.1. Actor 所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。Actor支持三维变换，例如平移、旋转和缩放。</description>
     </item>
     <item>
       <title>Maya Learning</title>
-      <link>https://www.bobbiee.com/post/2024-07-20-maya-learning/</link>
+      <link>http://localhost:1313/post/2024-07-20-maya-learning/</link>
       <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://www.bobbiee.com/post/2024-07-20-maya-learning/</guid>
+      <guid>http://localhost:1313/post/2024-07-20-maya-learning/</guid>
       <description>关于maya的一些操作 1. 导入fbx后尺寸不对，调整当前显示的默认单位 window-&amp;gt;preference-&amp;gt;settings 2. 动画播放的速度不对，可能是默认的播放选项不一样，window-&amp;gt</description>
     </item>
   </channel>
