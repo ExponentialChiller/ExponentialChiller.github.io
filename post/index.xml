@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Eddy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Sep 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.bobbiee.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ue Network Learning</title>
+      <link>https://www.bobbiee.com/post/2024-09-04-ue-network/</link>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://www.bobbiee.com/post/2024-09-04-ue-network/</guid>
+      <description>1. UE4 网络框架 client-server 框架，与一般的 APP 应用相同。实际的游戏状态由服务器计算和确认，各个客户端使用自主代理来远程控制其对应角色。控制游戏的 PlayerController 等在服务器</description>
+    </item>
     <item>
       <title>Ue Modules Learning</title>
       <link>https://www.bobbiee.com/post/2024-08-10-modules-in-ue/</link>
